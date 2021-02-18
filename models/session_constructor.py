@@ -1,5 +1,6 @@
 from data.users import said
 import models.http as http
+import pyodbc
 from data.endpoints import loginInit, loginConfirm, setPin, sendOtp, createSession, zagadki
 
 
@@ -8,6 +9,33 @@ class Singleton(object):
         if not hasattr(cls, 'instance'):
             cls.instance = super(Singleton, cls).__new__(cls)
         return cls.instance
+
+
+class Headers(Singleton):
+
+    def default_header(self, session):
+        headers = {'SessionToken': session['sessiontoken'],
+                   'Content-Type': r'application/json; charset=UTF-8'}
+        return headers
+
+
+class DbConnect(Singleton):
+
+    def __init__(self):
+        self.server = 'T-tdabb1-cdl01.abb-win.akbars.ru'
+        self.database = ''
+        self.username = ''
+        self.password = ''
+
+    def db_connect(self):
+        cnxn = pyodbc.connect(
+            'DRIVER={SQL Server};SERVER=' + self.server + ';DATABASE=' + self.database + ';UID=' + self.username + ';PWD=' + self.password)
+
+        cursor = cnxn.cursor()
+        return cursor
+
+    def db_select(self):
+        self.db_connect()
 
 
 class Session(Singleton):

@@ -10,14 +10,3 @@ def session():
     return session
 
 
-@pytest.fixture(scope="session")
-def db_connect():
-    server = 'T-tdabb1-cdl01.abb-win.akbars.ru'
-    database = ''
-    username = ''
-    password = ''
-    cnxn = pyodbc.connect(
-        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
-    cursor = cnxn.cursor()
-
-
