@@ -22,7 +22,7 @@ class Headers(Singleton):
 class DbConnect(Singleton):
 
     def __init__(self):
-        self.server = 'T-tdabb1-cdl01.abb-win.akbars.ru'
+        self.server = 'sqlwin16test1.abb-win.akbars.ru\db3'
         self.database = 'abo_db_financialtemplates'
         self.username = ''
         self.password = ''
