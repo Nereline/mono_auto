@@ -28,14 +28,13 @@ class DbConnect(Singleton):
         self.password = ''
 
     def db_connect(self):
-        cnxn = pyodbc.connect(
-            'DRIVER={SQL Server};SERVER=' + self.server + ';DATABASE=' + self.database + ';UID=' + self.username + ';PWD=' + self.password)
-
-        cursor = cnxn.cursor()
-        return cursor
-
-    def db_select(self):
-        self.db_connect()
+        try:
+            cnxn = pyodbc.connect(
+                'DRIVER={SQL Server};SERVER=' + self.server + ';DATABASE=' + self.database + ';UID=' + self.username + ';PWD=' + self.password)
+            cursor = cnxn.cursor()
+            return cursor
+        except:
+            return False
 
 
 class Session(Singleton):

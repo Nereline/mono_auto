@@ -3,10 +3,7 @@ import pytest
 
 
 def test_db(session, db_connect):
-    try:
-        db_connect.execute("select ...")
-        row = db_connect.fetchone()
-        if row:
-            print(row)
-    except:
+    if not db_connect:
         pytest.skip('Не удался коннект к бд')
+
+    get_templates_from_db(session)
