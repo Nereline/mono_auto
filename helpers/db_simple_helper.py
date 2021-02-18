@@ -1,11 +1,10 @@
-import models.http as http
-from models.session_constructor import Headers, DbConnect
+from models.session_constructor import DbConnect
 
 
-def get_templates_from_db(session):
+def get_templates_from_db():
     connect = DbConnect()
     cursor = connect.db_connect()
-    cursor.execute("SELECT...")
+    cursor.execute("select top(10) * from Templates")
     row = cursor.fetchone()
     while row:
         print(row[0])
